@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(MaterialApp(
@@ -22,6 +23,15 @@ class _HomeState extends State<Home> {
     "Frase4",
   ];
 
+  var _fraseGerada = "Clique abaixo para gerar uma frase!";
+
+  void _gerarFrase() {
+    var numeroSorteado = Random().nextInt(_frases.length);
+
+    setState(() {
+      _fraseGerada = _frases[numeroSorteado];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +50,8 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Image.asset("images/logo.png"),
-            const Text(
-              "Clique abaixo para gerar uma frase!",
+            Text(
+              _fraseGerada,
               style: TextStyle(
                 fontSize: 17,
                 fontStyle: FontStyle.italic,
@@ -56,7 +66,7 @@ class _HomeState extends State<Home> {
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
-              onPressed: () {},
+              onPressed: _gerarFrase,
             ),
           ],
         ),
